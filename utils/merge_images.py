@@ -13,6 +13,18 @@ def merge_images_col(img_list,padding=10):
     for i, img in enumerate(img_list):
         img_merge.paste(img, (0, i * (img.size[1] + padding)))
     return img_merge
+def merge_images_col_difference_size(img_list,padding=10):
+    h_size = 0
+    for img in img_list:
+        h_size += img.size[1] + padding
+    h_size -=padding
+    img_merge = Image.new('RGB', (img_list[0].size[0],
+                                  h_size),color=(255, 255, 255))
+    h_next = 0
+    for i, img in enumerate(img_list):
+        img_merge.paste(img, (0, h_next))
+        h_next += img.size[1] + padding
+    return img_merge
 if __name__=="__main__":
     img_01 = Image.open("digit-number-img-0.jpg")
     img_02 = Image.open("digit-number-img-1.jpg")
