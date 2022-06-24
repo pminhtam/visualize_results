@@ -24,7 +24,9 @@ def write_text_on_numpy_image(image,text):
 
     ax.imshow(image)
     # ax.text(1.0, 1.0, text,horizontalalignment='left',verticalalignment='top', bbox=dict(fill=True, linewidth=2,facecolor='red',edgecolor='red'),fontsize=110)
-    ax.text(2.0, 2.0, text,horizontalalignment='left',verticalalignment='top',color='red', bbox=dict(fill=True, linewidth=2,facecolor=(0.8,0.8,0.8),edgecolor=(0.8,0.8,0.8)),fontsize=110)
+    ax.text(2.0, 2.0, text,horizontalalignment='left',verticalalignment='top',color='red',
+            bbox=dict(fill=True, linewidth=2,facecolor=(0.8,0.8,0.8),edgecolor=(0.8,0.8,0.8)),
+            fontsize=140)
     # ax.axis('off')
     fig.canvas.draw()  # draw the canvas, cache the renderer
 

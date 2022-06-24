@@ -5,9 +5,9 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes, inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 
-def zoom_image(image,x1=0,y1=0,x2=0,y2=0):
-    x1, y1, x2, y2 = [100, 150, 130, 210]
-
+def zoom_image(image,xy_zoom = (40, 150, 65, 175)):
+    # x1, y1, x2, y2 = [40, 150, 65, 175]
+    x1, y1, x2, y2 = xy_zoom
     xpixels, ypixels, _ = image.shape
     dpi = 10
     fig, ax = plt.subplots(figsize=(ypixels / dpi, xpixels / dpi), dpi=dpi)
