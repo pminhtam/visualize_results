@@ -6,28 +6,29 @@ from images_visual.add_infor import write_text_on_numpy_image
 from images_visual.zoom_image import zoom_image
 from glob import glob
 
-def process_one_image(image_path):
+def process_one_image(image_path,xy_zoom):
     img = Image.open(image_path).convert('RGB')
-    img_text = write_text_on_numpy_image(np.array(img_0), img_path_0.split('/')[-1])
-    str = "PSNR=" + img_path_1.split('/')[-1].split('_')[4][:5] + "\nSSIM=" + img_path_1.split('/')[-1].split('_')[
+    str = ''
+    if 'psnr' in image_path and 'ssim' in image_path:
+        str = "PSNR=" + image_path.split('/')[-1].split('_')[-3][:5] + "\nSSIM=" + image_path.split('/')[-1].split('_')[
                                                                                     -1][:4]
 
     img_text = write_text_on_numpy_image(np.array(img), str)
-    img_zoom = zoom_image(img_text)
+    img_zoom = zoom_image(img_text,xy_zoom)
     return img_zoom
 
 if __name__ == "__main__":
     xy_zoom_dict = {
-                    # 'synthetic':(40, 200, 90, 250),
+                    'synthetic':(40, 200, 90, 250),
                     'dnd':(100, 350, 150, 400),
                     'polyu':(40, 150, 65, 175),
                     'renoir':(40, 150, 65, 175),
                     'sidd':(40, 150, 65, 175),
-                    'sythetic':(40, 150, 65, 175),
+                    # 'synthetic':(40, 150, 65, 175),
                     }
 
     # datasets = ['dnd','polyu','renoir','sidd','sythetic']
-    datasets = ['polyu','renoir','sidd']
+    datasets = ['dnd','polyu','renoir','sidd']
     # datasets = ['synthetic']
     models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
     # models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
