@@ -10,7 +10,7 @@ def write_text_on_pil_image(image,text):
     draw.rectangle((x, y, x + w, y + h), fill=(200,200,200))
     draw.text((0, 0), text, fill=(255, 0, 0))
     return draw
-def write_text_on_numpy_image(image,text):
+def write_text_on_numpy_image(image,text,fontsize=140):
     # print(image)
     # height, width,c = image.shape
     xpixels, ypixels, _ = image.shape
@@ -26,7 +26,7 @@ def write_text_on_numpy_image(image,text):
     # ax.text(1.0, 1.0, text,horizontalalignment='left',verticalalignment='top', bbox=dict(fill=True, linewidth=2,facecolor='red',edgecolor='red'),fontsize=110)
     ax.text(2.0, 2.0, text,horizontalalignment='left',verticalalignment='top',color='white',
             bbox=dict(fill=True, linewidth=2,facecolor=(0.3,0.3,0.3),edgecolor=(0.3,0.3,0.3)),
-            fontsize=140)
+            fontsize=fontsize)
     # ax.axis('off')
     fig.canvas.draw()  # draw the canvas, cache the renderer
 
