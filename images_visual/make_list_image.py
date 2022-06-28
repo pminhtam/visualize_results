@@ -28,11 +28,12 @@ if __name__ == "__main__":
                     }
 
     # datasets = ['dnd','polyu','renoir','sidd','sythetic']
-    datasets = ['dnd','polyu','renoir','sidd']
-    # datasets = ['synthetic']
-    models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
-    # models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    # datasets = ['dnd','polyu','renoir','sidd']
+    datasets = ['synthetic']
+    # models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
     for data in datasets:
+        fontsize = 140
         images_list_noise = glob(f'../images/{data}/{models[0]}*/*noise*.png')
         # print(images_list_noise)
         for image_path_noise in images_list_noise:
@@ -44,12 +45,17 @@ if __name__ == "__main__":
             else:
                 image_name = image_path_noise.split('/')[-1][:2]
             img_gt_zoom = None
+            img_noise = Image.open(image_path_noise).convert('RGB')
+            if data == 'synthetic':
+                wpixels, hpixels = img_noise.size
+                xy_zoom_dict['synthetic'] = int(0.1 * wpixels), int(0.75 * hpixels), int(0.2 * wpixels), int(
+                    0.85 * hpixels)
+                fontsize = int(140*wpixels/256)
             if data != 'dnd':
                 image_path_gt = glob(f'../images/{data}/{models[0]}*/{image_name}*gt*.png')[0]
                 # print(image_path_gt)
                 img_gt = Image.open(image_path_gt).convert('RGB')
                 img_gt_zoom = zoom_image(np.array(img_gt),xy_zoom=xy_zoom_dict[data])
-            img_noise = Image.open(image_path_noise).convert('RGB')
             img_noise_zoom = zoom_image(np.array(img_noise),xy_zoom=xy_zoom_dict[data])
             list_image_merge.append(Image.fromarray(img_noise_zoom))
             for model_name in models:
@@ -64,7 +70,7 @@ if __name__ == "__main__":
                             image_path_model_mu.split('/')[-1].split('_')[-1][:4]
                 # print(image_path_model_mu.split('/')[-1].split('_')[4][:5])
                 # print(str_mu)
-                img_mu_text = write_text_on_numpy_image(np.array(image_model_mu), str_mu)
+                img_mu_text = write_text_on_numpy_image(np.array(image_model_mu), str_mu,fontsize=fontsize)
                 img_mu_zoom = zoom_image(np.array(img_mu_text),xy_zoom=xy_zoom_dict[data])
                 list_image_merge.append(Image.fromarray(img_mu_zoom))
 
