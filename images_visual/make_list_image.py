@@ -5,6 +5,8 @@ from utils.merge_images import merge_images_row
 from images_visual.add_infor import write_text_on_numpy_image
 from images_visual.zoom_image import zoom_image
 from glob import glob
+import matplotlib
+# matplotlib.rcParams['text.usetex'] = True
 
 def process_one_image(image_path,xy_zoom):
     img = Image.open(image_path).convert('RGB')
@@ -28,12 +30,12 @@ if __name__ == "__main__":
                     }
 
     # datasets = ['dnd','polyu','renoir','sidd','sythetic']
-    # datasets = ['dnd','polyu','renoir','sidd']
-    datasets = ['synthetic']
-    # models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
-    models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    datasets = ['sidd','polyu','renoir']
+    # datasets = ['synthetic']
+    models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    # models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
     for data in datasets:
-        fontsize = 140
+        fontsize = 200
         images_list_noise = glob(f'../images/{data}/{models[0]}*/*noise*.png')
         # print(images_list_noise)
         for image_path_noise in images_list_noise:
@@ -50,7 +52,7 @@ if __name__ == "__main__":
                 wpixels, hpixels = img_noise.size
                 xy_zoom_dict['synthetic'] = int(0.1 * wpixels), int(0.75 * hpixels), int(0.2 * wpixels), int(
                     0.85 * hpixels)
-                fontsize = int(140*wpixels/256)
+                fontsize = int(175*wpixels/256)
             if data != 'dnd':
                 image_path_gt = glob(f'../images/{data}/{models[0]}*/{image_name}*gt*.png')[0]
                 # print(image_path_gt)
@@ -66,8 +68,8 @@ if __name__ == "__main__":
                 if data == 'dnd':
                     str_mu = ''
                 else:
-                    str_mu = "PSNR=" + image_path_model_mu.split('/')[-1].split('_')[-3][:5] + "\nSSIM=" + \
-                            image_path_model_mu.split('/')[-1].split('_')[-1][:4]
+                    str_mu = r"$PSNR=" + image_path_model_mu.split('/')[-1].split('_')[-3][:5] + "$\n$SSIM=" + \
+                            image_path_model_mu.split('/')[-1].split('_')[-1][:4] + "$"
                 # print(image_path_model_mu.split('/')[-1].split('_')[4][:5])
                 # print(str_mu)
                 img_mu_text = write_text_on_numpy_image(np.array(image_model_mu), str_mu,fontsize=fontsize)
@@ -79,6 +81,7 @@ if __name__ == "__main__":
             if img_gt_zoom is not None:
                 list_image_merge.append(Image.fromarray(img_gt_zoom))
             img_merge = merge_images_row(list_image_merge,padding=3)
+            # img_merge.show()
             img_merge.save(f'../images/merge/{data}_{image_name}_merge.png')
             # exit()
     """

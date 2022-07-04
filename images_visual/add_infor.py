@@ -11,6 +11,14 @@ def write_text_on_pil_image(image,text):
     draw.text((0, 0), text, fill=(255, 0, 0))
     return draw
 def write_text_on_numpy_image(image,text,fontsize=140):
+    # import matplotlib
+    # matplotlib.rcParams['text.usetex'] = True
+    from matplotlib import rc
+    rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    ## for Palatino and other serif fonts use:
+    # rc('font',**{'family':'serif','serif':['Palatino']})
+    rc('text', usetex=True)
+
     # print(image)
     # height, width,c = image.shape
     xpixels, ypixels, _ = image.shape
@@ -24,8 +32,9 @@ def write_text_on_numpy_image(image,text,fontsize=140):
 
     ax.imshow(image)
     # ax.text(1.0, 1.0, text,horizontalalignment='left',verticalalignment='top', bbox=dict(fill=True, linewidth=2,facecolor='red',edgecolor='red'),fontsize=110)
-    ax.text(2.0, 2.0, text,horizontalalignment='left',verticalalignment='top',color='white',
-            bbox=dict(fill=True, linewidth=2,facecolor=(0.3,0.3,0.3),edgecolor=(0.3,0.3,0.3)),
+    # ax.text(1.46*xpixels, ypixels/1.56, text,horizontalalignment='right',verticalalignment='bottom',color='white',
+    ax.text(width*0.965, height*0.97, text,horizontalalignment='right',verticalalignment='bottom',color='white',
+            bbox=dict(boxstyle="round",fill=True, linewidth=2,facecolor=(0.3,0.3,0.3),edgecolor=(0.3,0.3,0.3)),
             fontsize=fontsize)
     # ax.axis('off')
     fig.canvas.draw()  # draw the canvas, cache the renderer

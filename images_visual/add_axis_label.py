@@ -2,9 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from PIL import Image, ImageDraw,ImageFont
+from matplotlib import rc
+
 
 def add_x_label_one_image(ypixels ,font_size=500,lb="Clean"):
-    xx_label = font_size*15/400
+    rc('font', **{'family': 'sans-serif', 'sans-serif': ['Helvetica']})
+    ## for Palatino and other serif fonts use:
+    # rc('font',**{'family':'serif','serif':['Palatino']})
+    rc('text', usetex=True)
+    xx_label = font_size*11/400
     # print(image)
     # height, width,c = image.shape
     # print(xpixels, ypixels)
@@ -14,10 +20,10 @@ def add_x_label_one_image(ypixels ,font_size=500,lb="Clean"):
     plt.margins(0, 0)
     width, height = fig.get_size_inches()* fig.get_dpi()
     width, height = int(width), int(height)
-    print(width,height)
+    # print(width,height)
     plt.text(0.5, 0.5, lb, fontsize=font_size, horizontalalignment='center',
                  verticalalignment='center', transform=ax.transAxes)
-    plt.show()
+    # plt.show()
     fig.canvas.draw()  # draw the canvas, cache the renderer
 
     image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8').reshape(height, width, 3)
@@ -33,6 +39,6 @@ def add_x_label(image,label,font_size=10):
         image = add_x_label_one_image(yy,font_size,lb)
         images_label_list.append(Image.fromarray(image))
     img_merge = merge_images_row(images_label_list, padding=3)
-    img_merge.show()
+    # img_merge.show()
     # exit()
     return img_merge
