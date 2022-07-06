@@ -31,10 +31,10 @@ def resize_image_list(list_image_merge):
 
 if __name__ == "__main__":
     font_size_dict = {
-        'dnd': 600,
-        'polyu': 300,
-        'renoir': 300,
-        'sidd': 300,
+        'dnd': 400*0.8,
+        'polyu': 200*0.8,
+        'renoir': 200*0.8,
+        'sidd': 200*0.8,
     }
     # """
     # datasets = ['dnd','polyu','renoir','sidd','sythetic']

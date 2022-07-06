@@ -10,6 +10,7 @@ def add_x_label_one_image(ypixels ,font_size=500,lb="Clean"):
     ## for Palatino and other serif fonts use:
     # rc('font',**{'family':'serif','serif':['Palatino']})
     rc('text', usetex=True)
+    # rc('pgf', texsystem='pdflatex')  # or luatex, xelatex...
     xx_label = font_size*11/400
     # print(image)
     # height, width,c = image.shape
