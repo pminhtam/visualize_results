@@ -33,26 +33,30 @@ if __name__ == "__main__":
     # datasets = ['sidd','polyu','renoir']
     xy_zoom_dict_renoir = { '2': (130, 150, 155, 175), '3': (50,150,75,175),'9':(55,150,80,175),
                             '11':(3,170,28,195),'13':(30,150,55,175),'20':(60,150,85,175)}
-    datasets = ['renoir']
-    renoir_choosen = ['3','5','9','11','13','20']
+    # datasets = ['renoir']
+    # renoir_choosen = ['3','5','9','11','13','20']
+    renoir_choosen = ['3','9','11','13','20']
 
     # datasets = ['sidd']
-    sidd_choosen = ['5_0_','15_0','15_1','16_1','31_0','36_1']
+    # sidd_choosen = ['5_0_','15_0','15_1','16_1','31_0','36_1']
+    sidd_choosen = ['5_0_','15_0','15_1','31_0','36_1']
     xy_zoom_dict_sidd = { '5_0_': (10, 40, 35, 65), '15_0': (50,120,75,145),'15_1':(60,160,85,185),
                             '15_2':(50,100,75,125),'16_0':(40,80,65,105),'16_1':(30,140,55,165),
                           '16_2':(70,70,95,95),'30_0':(50,120,75,145),'30_1':(40,170,75,195),
                           '31_0':(60,125,85,150),}
-    # datasets = ['polyu']
+    datasets = ['polyu']
     polyu_choosen = ['1','10','14','17','18']
     xy_zoom_dict_polyu = { '0': (35, 175, 60, 200), '1': (45,100,70,125),'7':(40,100,65,125),
                            '8':(40,70,65,95),'9':(40,120,65,145),'10':(30,195,55,220),
                            '13':(60,50,96,75),'14':(30,170,55,195),'17':(30,140,55,165)
                            }
     # datasets = ['synthetic']
-    models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    # models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    models = ['bayes_noise2void','bayes_2model' ,'neigh2neigh','noise2same', 'bayes_neigh2neigh_3_taylor_2']
     # models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh', 'bayes_neigh2neigh_3_taylor_2']
+    # models = ['bayes_noise2void','bayes_gauss' ,'neigh2neigh','noise2same', 'bayes_neigh2neigh_3_taylor_2']
     for data in datasets:
-        fontsize = 160
+        fontsize = 210
         images_list_noise = glob(f'../images/{data}/{models[0]}*/*noise*.png')
         # print(images_list_noise)
 
@@ -60,16 +64,16 @@ if __name__ == "__main__":
             xy_zoom_image = xy_zoom_dict[data]
             # if image_path_noise.split("/")[-1].split("_")[0] != "14":
             #     continue
-            # if image_path_noise.split("/")[-1].split("_")[0] not in polyu_choosen:
+            if image_path_noise.split("/")[-1].split("_")[0] not in polyu_choosen:
             # if image_path_noise.split("/")[-1][:4] not in sidd_choosen:
-            if image_path_noise.split("/")[-1].split("_")[0] not in renoir_choosen:
+            # if image_path_noise.split("/")[-1].split("_")[0] not in renoir_choosen:
                 continue
-            # if image_path_noise.split("/")[-1].split("_")[0] in xy_zoom_dict_polyu.keys():
-            #     xy_zoom_image = xy_zoom_dict_polyu[image_path_noise.split("/")[-1].split("_")[0]]
+            if image_path_noise.split("/")[-1].split("_")[0] in xy_zoom_dict_polyu.keys():
+                xy_zoom_image = xy_zoom_dict_polyu[image_path_noise.split("/")[-1].split("_")[0]]
             # if image_path_noise.split("/")[-1][:4] in xy_zoom_dict_sidd.keys():
             #     xy_zoom_image = xy_zoom_dict_sidd[image_path_noise.split("/")[-1][:4]]
-            if image_path_noise.split("/")[-1].split("_")[0] in xy_zoom_dict_renoir.keys():
-                xy_zoom_image = xy_zoom_dict_renoir[image_path_noise.split("/")[-1].split("_")[0]]
+            # if image_path_noise.split("/")[-1].split("_")[0] in xy_zoom_dict_renoir.keys():
+            #     xy_zoom_image = xy_zoom_dict_renoir[image_path_noise.split("/")[-1].split("_")[0]]
                 # continue
             # continue
             list_image_merge = []

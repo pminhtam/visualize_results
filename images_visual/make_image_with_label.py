@@ -31,17 +31,17 @@ def resize_image_list(list_image_merge):
 
 if __name__ == "__main__":
     font_size_dict = {
-        'dnd': 400*0.8,
-        'polyu': 200*0.8,
-        'renoir': 200*0.8,
-        'sidd': 200*0.8,
+        'dnd': 400*1.2,
+        'polyu': 200*1.2,
+        'renoir': 200*1.2,
+        'sidd': 200*1.2,
     }
     # """
     # datasets = ['dnd','polyu','renoir','sidd','sythetic']
     # datasets = ['dnd']
     datasets = ['polyu','renoir','sidd']
     # label = ['Noise','N2V','Laine19' ,'N2N', 'Ours']
-    label = ['Noise','N2V','Laine19' ,'N2N', 'Ours','Clean']
+    label = ['Noise','N2V','Laine19' ,'N2N','Noise2Same', 'Ours','Clean']
     for data in datasets:
         list_image_merge = []
         images_list_noise = glob(f'../images/merge/{data}*.png')
